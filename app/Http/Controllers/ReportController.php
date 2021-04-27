@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
     
 use App\Models\Report;
+use App\Models\Customer;
 use Illuminate\Http\Request;
-    
+
 class ReportController extends Controller
 { 
     /**
@@ -50,21 +51,35 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'customer_id' => 'required',
+            'fullName' => 'required|exists:customers',
             'equipmentBrand' => 'required',
             'equipmentModel' => 'required',
             'equipmentSN' => 'required',
-            'equipmentAccesories' => 'required',
-            'reportedFail' => 'required',
-            'solution' => 'required',
-            'diagnosticCost' => 'required',
-            'finalCost' => 'required',
+            'equipmentAccesories' => '',
+            'reportedFail' => '',
+            'solution' => '',
+            'diagnosticCost' => 'numeric',
+            'finalCost' => 'numeric',
             'entranceDate' => 'required',
-            'exitDate' => 'required'
+            'exitDate' => ''
         ]);
-    
-        Report::create($request->all());
-    
+        $id = Customer::where('fullName', $request->fullName)->first()->id;
+        
+        /*Report::create($request->all());*/
+        Report::create([
+            'customer_id' => $id,
+            'equipmentBrand' => $request->equipmentBrand,
+            'equipmentModel' => $request->equipmentModel,
+            'equipmentSN' => $request->equipmentSN,
+            'equipmentAccesories' => $request->equipmentAccesories,
+            'reportedFail' => $request->reportedFail,
+            'solution' => $request->solution,
+            'diagnosticCost' => $request->diagnosticCost,
+            'finalCost' => $request->finalCost,
+            'entranceDate' => $request->entranceDate,
+            'exitDate' => $request->exitDate,
+
+        ]);
         return redirect()->route('reports.index')
                         ->with('success','Report created successfully.');
     }
@@ -101,20 +116,35 @@ class ReportController extends Controller
     public function update(Request $request, Report $report)
     {
          request()->validate([
-            'customer_id' => 'required',
+            'fullName' => 'required|exists:customers',
             'equipmentBrand' => 'required',
             'equipmentModel' => 'required',
             'equipmentSN' => 'required',
-            'equipmentAccesories' => 'required',
-            'reportedFail' => 'required',
-            'solution' => 'required',
-            'diagnosticCost' => 'required',
-            'finalCost' => 'required',
+            'equipmentAccesories' => '',
+            'reportedFail' => '',
+            'solution' => '',
+            'diagnosticCost' => 'numeric',
+            'finalCost' => 'numeric',
             'entranceDate' => 'required',
-            'exitDate' => 'required'
+            'exitDate' => ''
         ]);
-    
-        $report->update($request->all());
+        
+        $id = Customer::where('fullName', $request->fullName)->first()->id;
+        /*$report->update($request->all());*/
+        Report::create([
+            'customer_id' => $id,
+            'equipmentBrand' => $request->equipmentBrand,
+            'equipmentModel' => $request->equipmentModel,
+            'equipmentSN' => $request->equipmentSN,
+            'equipmentAccesories' => $request->equipmentAccesories,
+            'reportedFail' => $request->reportedFail,
+            'solution' => $request->solution,
+            'diagnosticCost' => $request->diagnosticCost,
+            'finalCost' => $request->finalCost,
+            'entranceDate' => $request->entranceDate,
+            'exitDate' => $request->exitDate,
+
+        ]);
     
         return redirect()->route('reports.index')
                         ->with('success','Report updated successfully');

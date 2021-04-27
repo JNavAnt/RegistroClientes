@@ -12,4 +12,20 @@ class Report extends Model
     public function customer(){
         return $this->belongsTo(Customer::class);
     }
+
+    protected $fillable = [
+        'customer_id', 
+        'equipmentBrand', 
+        'equipmentModel', 
+        'equipmentSN',
+        'equipmentAccesories',
+        'reportedFail', 
+        'solution', 
+        'diagnosticCost',
+        'finalCost',
+        'exitDate'
+    ];
+
+    
+
 }

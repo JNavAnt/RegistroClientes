@@ -33,8 +33,8 @@
          <div class="row">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-		            <strong>Customer id:</strong>
-		            <input type="text" name="customer_id" class="form-control" placeholder="Customer id">
+		            <strong>Customer name:</strong>
+		            <input type="text" name="fullName" class="form-control" placeholder="Customer name">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
@@ -76,13 +76,13 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>diagnosticCost:</strong>
-		            <input type="number" name="diagnosticCost" class="form-control" placeholder="diagnosticCost">
+		            <input type="string" name="diagnosticCost" class="form-control" placeholder="diagnosticCost">
 		        </div>
 		    </div>
 			<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>finalCost:</strong>
-		            <input type="number" name="finalCost" class="form-control" placeholder="finalCost">
+		            <input type="string" name="finalCost" class="form-control" placeholder="finalCost">
 		        </div>
 		    </div>
 			<div class="col-xs-12 col-sm-12 col-md-12">

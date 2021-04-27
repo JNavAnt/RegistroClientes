@@ -17,6 +17,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:crear usuario', ['only' => ['create','store']]);
+    }
+
     public function index(Request $request)
     {
         $data = User::orderBy('id','DESC')->paginate(5);

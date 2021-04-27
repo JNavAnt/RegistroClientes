@@ -26,24 +26,27 @@
     <table class="table table-bordered">
         <tr>
             <th>No</th>
-            <th>Name</th>
-            <th>Details</th>
+            <th>Customer</th>
+            <th>equipmentBrand</th>
+            <th>equipmentModel</th>
+            <th>equipmentSN</th>
+            <th>entranceDate</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($reports as $report)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ $report->customer_id }}</td>
+	        <td>{{ $report->customer->fullName }}</td>
 	        <td>{{ $report->equipmentBrand }}</td>
             <td>{{ $report->equipmentModel }}</td>
             <td>{{ $report->equipmentSN }}</td>
-            <td>{{ $report->equipmentAccesories }}</td>
-	        <td>{{ $report->reportedFail }}</td>
-            <td>{{ $report->solution }}</td>
-            <td>{{ $report->diagnosticCost }}</td>
-            <td>{{ $report->finalCost }}</td>
+            <!--<td>{{ $report->equipmentAccesories }}</td>-->
+	        <!--<td>{{ $report->reportedFail }}</td>-->
+            <!--<td>{{ $report->solution }}</td>-->
+            <!--<td>{{ $report->diagnosticCost }}</td>-->
+            <!--<td>{{ $report->finalCost }}</td>-->
             <td>{{ $report->entranceDate }}</td>
-            <td>{{ $report->exitDate}}</td>
+            <!--<td>{{ $report->exitDate}}</td>-->
 	        <td>
                 <form action="{{ route('reports.destroy',$report->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('reports.show',$report->id) }}">Show</a>

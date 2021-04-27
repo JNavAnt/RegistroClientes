@@ -19,13 +19,13 @@ class CreateReportsTable extends Migration
             $table->string('equipmentBrand');
             $table->string('equipmentModel');
             $table->string('equipmentSN');
-            $table->text('equipmentAccesories');
-            $table->text('reportedFail');
-            $table->text('solution');
-            $table->decimal('diagnosticCost',19,4);
-            $table->decimal('finalCost',19,4);
+            $table->text('equipmentAccesories')->nullable();
+            $table->text('reportedFail')->nullable();
+            $table->text('solution')->nullable();
+            $table->decimal('diagnosticCost',19,4)->nullable();
+            $table->decimal('finalCost',19,4)->nullable();
             $table->dateTime('entranceDate');
-            $table->dateTime('exitDate');
+            $table->dateTime('exitDate')->nullable();
             $table->timestamps();
         });
     }

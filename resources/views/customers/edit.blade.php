@@ -35,14 +35,25 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Full name:</strong>
-		            <input type="text" name="name" value="{{ $customer->fullName }}" class="form-control" placeholder="Full name">
+		            <input type="text" name="fullName" value="{{ $customer->fullName }}" class="form-control" placeholder="Full name">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Business:</strong>
                     <input type="text" name="business" value="{{ $customer->business }}" class="form-control" placeholder="Name">
-		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $customer->detail }}</textarea>
+		        </div>
+		    </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+		        <div class="form-group">
+		            <strong>Email:</strong>
+                    <input type="email" name="email" value="{{ $customer->email }}" class="form-control" placeholder="Name">
+		        </div>
+		    </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+		        <div class="form-group">
+		            <strong>Phone:</strong>
+                    <input type="text" name="phone" value="{{ $customer->phone }}" class="form-control" placeholder="Name">
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
