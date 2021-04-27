@@ -38,11 +38,24 @@
         <div class="form-group">
             <strong>Permission:</strong>
             <br/>
-            @foreach($permission as $value)
+            <!--@foreach($permission as $value)
                 <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
                 {{ $value->name }}</label>
             <br/>
-            @endforeach
+            @endforeach-->
+            <table class="">
+                @foreach($permission->chunk(4) as $chunkedValue)
+                    <tr class="mr-3 ">
+                        @foreach($chunkedValue as $value)
+                            <td class="">                
+                                <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
+                                {{ $value->name }}</label>
+                            </td>
+                            
+                        @endforeach
+                    </tr>
+                @endforeach
+            </table>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -64,7 +64,11 @@ class ReportController extends Controller
             'exitDate' => ''
         ]);
         $id = Customer::where('fullName', $request->fullName)->first()->id;
-        
+        $entranceDate = \Carbon\Carbon::parse($request->entranceDate);
+        $entranceDate->format('Y-m-d H:i:s');
+        $exitDate = \Carbon\Carbon::parse($request->exitDate);
+        $exitDate->format('Y-m-d H:i:s');
+
         /*Report::create($request->all());*/
         Report::create([
             'customer_id' => $id,
@@ -76,8 +80,8 @@ class ReportController extends Controller
             'solution' => $request->solution,
             'diagnosticCost' => $request->diagnosticCost,
             'finalCost' => $request->finalCost,
-            'entranceDate' => $request->entranceDate,
-            'exitDate' => $request->exitDate,
+            'entranceDate' => $entranceDate,
+            'exitDate' => $exitDate,
 
         ]);
         return redirect()->route('reports.index')
@@ -130,8 +134,12 @@ class ReportController extends Controller
         ]);
         
         $id = Customer::where('fullName', $request->fullName)->first()->id;
+        $entranceDate = \Carbon\Carbon::parse($request->entranceDate);
+        $entranceDate->format('Y-m-d H:i:s');
+        $exitDate = \Carbon\Carbon::parse($request->exitDate);
+        $exitDate->format('Y-m-d H:i:s');
         /*$report->update($request->all());*/
-        Report::create([
+        $report->update([
             'customer_id' => $id,
             'equipmentBrand' => $request->equipmentBrand,
             'equipmentModel' => $request->equipmentModel,
@@ -141,8 +149,8 @@ class ReportController extends Controller
             'solution' => $request->solution,
             'diagnosticCost' => $request->diagnosticCost,
             'finalCost' => $request->finalCost,
-            'entranceDate' => $request->entranceDate,
-            'exitDate' => $request->exitDate,
+            'entranceDate' => $entranceDate,
+            'exitDate' => $exitDate,
 
         ]);
     

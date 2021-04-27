@@ -35,25 +35,25 @@
          	<div class="col-xs-12 col-sm-12 col-md-12">
 		 		<div class="form-group">
 		            <strong>Customer name:</strong>
-		            <input type="text" name="fullName" class="form-control" placeholder="Customer name">
+		            <input type="text" name="fullName" class="form-control" placeholder="Customer name" value={{ $report->customer->fullName }}>
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>equipmentBrand:</strong>
-		            <input type="text" name="equipmentBrand" class="form-control" placeholder="equipmentBrand">
+		            <input type="text" name="equipmentBrand" class="form-control" placeholder="equipmentBrand" value={{ $report->equipmentBrand }}>
 		        </div>
 		    </div>
 			<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>equipmentModel:</strong>
-		            <input type="string" name="equipmentModel" class="form-control" placeholder="equipmentModel">
+		            <input type="string" name="equipmentModel" class="form-control" placeholder="equipmentModel" value={{ $report->equipmentModel}}>
 		        </div>
 		    </div>
 			<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>equipmentSN:</strong>
-		            <input type="string" name="equipmentSN" class="form-control" placeholder="equipmentSN">
+		            <input type="string" name="equipmentSN" class="form-control" placeholder="equipmentSN" value={{ $report->equipmentSN}}> 
 		        </div>
 		    </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -71,31 +71,31 @@
 			<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>solution:</strong>
-		            <textarea class="form-control" style="height:150px" name="solution" placeholder="solution">{{ $report->reportedFail }}</textarea>
+		            <textarea class="form-control" style="height:150px" name="solution" placeholder="solution">{{ $report->solution}}</textarea>
 		        </div>
 		    </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>diagnosticCost:</strong>
-		            <input type="string" name="diagnosticCost" class="form-control" placeholder="diagnosticCost">
+		            <input type="string" name="diagnosticCost" class="form-control" placeholder="diagnosticCost" value={{ $report->diagnosticCost }}>
 		        </div>
 		    </div>
 			<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>finalCost:</strong>
-		            <input type="string" name="finalCost" class="form-control" placeholder="finalCost">
+		            <input type="string" name="finalCost" class="form-control" placeholder="finalCost" value={{ $report->finalCost }}>
 		        </div>
 		    </div>
 			<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>entranceDate:</strong>
-		            <input type="datetime" name="entranceDate" class="form-control" placeholder="entranceDate">
+		            <input type="datetime-local" name="entranceDate" class="form-control" placeholder="entranceDate" value={{ $report->entranceDate}}>
 		        </div>
 		    </div>
 			<div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>exitDate:</strong>
-		            <input type="datetime" name="exitDate" class="form-control" placeholder="exitDate">
+		            <input type="datetime-local" name="exitDate" class="form-control" placeholder="exitDate" value={{ $report->exitDate }}>
 		        </div>
 		    </div>
 

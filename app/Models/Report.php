@@ -23,6 +23,7 @@ class Report extends Model
         'solution', 
         'diagnosticCost',
         'finalCost',
+        'entranceDate',
         'exitDate'
     ];
 
