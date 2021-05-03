@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+//Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
@@ -32,6 +32,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('customers', CustomerController::class);
     Route::resource('reports', ReportController::class);
 });
+
+//print 
+Route::get('reports/{id}/print', [App\Http\Controllers\PDFController::class, 'print'])->name('reports.print');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

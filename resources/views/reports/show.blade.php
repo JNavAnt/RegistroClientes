@@ -10,6 +10,9 @@
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('customers.index') }}"> Back</a>
             </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('reports.print', $report->id)}}"> Print</a>
+            </div>
         </div>
     </div>
 
@@ -18,9 +21,28 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>customer id:</strong>
-                {{ $report->customer_id }}
+                {{ $report->customer->fullName }}
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>customer business:</strong>
+                {{ $report->customer->business }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>customer email:</strong>
+                {{ $report->customer->Email }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>customer phone:</strong>
+                {{ $report->customer->phone }}
+            </div>
+        </div>
+        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>equipmentBrand:</strong>

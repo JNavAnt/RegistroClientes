@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ReportController extends Controller
 { 
@@ -100,6 +101,14 @@ class ReportController extends Controller
     }
     
     /**
+     * Print the specified resource.
+     *
+     * @param  \App\Report  $report
+     * @return \Illuminate\Http\Response
+     */
+    
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Report  $report
@@ -171,4 +180,6 @@ class ReportController extends Controller
         return redirect()->route('reports.index')
                         ->with('success','Report deleted successfully');
     }
+
+    
 }
