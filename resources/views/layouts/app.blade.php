@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Registro Clientes') }}</title>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('public/js/app.js') }}" defer></script>
     <!--todo: Buscar las versiones mas recientes de jquery y bootstrap-->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -17,7 +17,7 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
@@ -43,12 +43,18 @@
                             <li><a class="nav-link m-3" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link m-3" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
-                            <li><a class="nav-link m-3" href="{{ route('users.index') }}">Manage Users</a></li>
-                            <li><a class="nav-link m-3" href="{{ route('roles.index') }}">Manage Role</a></li>
-                            @can('customer-list')
+                            @can('Mostrar usuario')
+                                <li><a class="nav-link m-3" href="{{ route('users.index') }}">Manage Users</a></li>
+                            @endcan
+                            @can('Mostrar rol')
+                                <li><a class="nav-link m-3" href="{{ route('roles.index') }}">Manage Role</a></li>
+                            @endcan
+                            @can('Mostrar cliente')
                                 <li><a class="nav-link m-3" href="{{ route('customers.index') }}">Manage Customer</a></li>
                             @endcan
-                            <li><a class="nav-link m-3" href="{{ route('reports.index') }}">Manage Report</a></li>
+                            @can('Mostrar reporte')
+                                <li><a class="nav-link m-3" href="{{ route('reports.index') }}">Manage Report</a></li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle m-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

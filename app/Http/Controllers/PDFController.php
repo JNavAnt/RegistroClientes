@@ -16,6 +16,7 @@ class PDFController extends Controller
         
         //view()->share('report.show', $data);
         $pdf = PDF::loadView('reports.print', ['report' => $report]);
+        
         //return view('reports.print', compact('report'));
         return $pdf->stream('Report.pdf');
     }

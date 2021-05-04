@@ -26,6 +26,7 @@ class CreateReportsTable extends Migration
             $table->decimal('finalCost',19,4)->nullable();
             $table->dateTime('entranceDate');
             $table->dateTime('exitDate')->nullable();
+            $table->unsignedBigInteger('state_id')->default(1);
             $table->timestamps();
         });
     }

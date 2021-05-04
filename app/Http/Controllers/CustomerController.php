@@ -14,10 +14,15 @@ class CustomerController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:customer-list|customer-create|customer-edit|customer-delete', ['only' => ['index','show']]);
+         /*$this->middleware('permission:customer-list|customer-create|customer-edit|customer-delete', ['only' => ['index','show']]);
          $this->middleware('permission:customer-create', ['only' => ['create','store']]);
          $this->middleware('permission:customer-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:customer-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:customer-delete', ['only' => ['destroy']]);*/
+
+        $this->middleware('permission:Mostrar cliente|Crear cliente|Editar cliente|Borrar cliente', ['only' => ['index','store']]);
+        $this->middleware('permission:Crear cliente', ['only' => ['create','store']]);
+        $this->middleware('permission:Editar cliente', ['only' => ['edit','update']]);
+        $this->middleware('permission:Borrar cliente', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

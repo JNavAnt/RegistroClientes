@@ -19,7 +19,10 @@ class UserController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:crear usuario', ['only' => ['create','store']]);
+        $this->middleware('permission:Mostrar usuario|Crear usuario|Editar usuario|Borrar usuario', ['only' => ['index','store']]);
+        $this->middleware('permission:Crear usuario', ['only' => ['create','store']]);
+        $this->middleware('permission:Editar usuario', ['only' => ['edit','update']]);
+        $this->middleware('permission:Borrar usuario', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
@@ -49,14 +52,21 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'nombre' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|same:confirm-password|',
+            'contraseña' => 'required|min:8|same:confirmar-contraseña|',
             'roles' => 'required'
         ]);
+
         //required|string|confirmed|
     
-        $input = $request->all();
+        $input = [
+            'name' => $request->nombre,
+            'email' => $request->email,
+            'password' => $request->contraseña,
+            'roles' => $request->roles,
+              
+        ];
         $input['password'] = Hash::make($input['password']);
     
         $user = User::create($input);

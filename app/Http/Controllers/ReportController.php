@@ -16,10 +16,15 @@ class ReportController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:report-list|report-create|report-edit|report-delete', ['only' => ['index','show']]);
+         /*$this->middleware('permission:report-list|report-create|report-edit|report-delete', ['only' => ['index','show']]);
          $this->middleware('permission:report-create', ['only' => ['create','store']]);
          $this->middleware('permission:report-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:report-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:report-delete', ['only' => ['destroy']]);*/
+
+        $this->middleware('permission:Mostrar reporte|Crear reporte|Editar reporte|Borrar reporte', ['only' => ['index','store']]);
+        $this->middleware('permission:Crear reporte', ['only' => ['create','store']]);
+        $this->middleware('permission:Editar reporte', ['only' => ['edit','update']]);
+        $this->middleware('permission:Borrar reporte', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -60,7 +65,7 @@ class ReportController extends Controller
             'reportedFail' => '',
             'solution' => '',
             'diagnosticCost' => 'numeric',
-            'finalCost' => 'numeric',
+            'finalCost' => 'numeric|nullable',
             'entranceDate' => 'required',
             'exitDate' => ''
         ]);
@@ -83,7 +88,6 @@ class ReportController extends Controller
             'finalCost' => $request->finalCost,
             'entranceDate' => $entranceDate,
             'exitDate' => $exitDate,
-
         ]);
         return redirect()->route('reports.index')
                         ->with('success','Report created successfully.');
@@ -137,7 +141,7 @@ class ReportController extends Controller
             'reportedFail' => '',
             'solution' => '',
             'diagnosticCost' => 'numeric',
-            'finalCost' => 'numeric',
+            'finalCost' => 'numeric|nullable',
             'entranceDate' => 'required',
             'exitDate' => ''
         ]);

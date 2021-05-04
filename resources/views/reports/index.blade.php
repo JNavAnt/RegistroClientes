@@ -8,7 +8,7 @@
                 <h2>Reports</h2>
             </div>
             <div class="pull-right">
-                @can('report-create')
+                @can('Crear reporte')
                 <a class="btn btn-success" href="{{ route('reports.create') }}"> Create New Report</a>
                 @endcan
             </div>
@@ -31,6 +31,7 @@
             <th>equipmentModel</th>
             <th>equipmentSN</th>
             <th>entranceDate</th>
+            <th>state</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($reports as $report)
@@ -40,24 +41,19 @@
 	        <td>{{ $report->equipmentBrand }}</td>
             <td>{{ $report->equipmentModel }}</td>
             <td>{{ $report->equipmentSN }}</td>
-            <!--<td>{{ $report->equipmentAccesories }}</td>-->
-	        <!--<td>{{ $report->reportedFail }}</td>-->
-            <!--<td>{{ $report->solution }}</td>-->
-            <!--<td>{{ $report->diagnosticCost }}</td>-->
-            <!--<td>{{ $report->finalCost }}</td>-->
-            <td>{{ $report->entranceDate }}</td>
-            <!--<td>{{ $report->exitDate}}</td>-->
+            <td>{{ $report->entranceDate}}</td>
+            <td>{{ $report->state->id}}</td>
 	        <td>
                 <form action="{{ route('reports.destroy',$report->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('reports.show',$report->id) }}">Show</a>
-                    @can('report-edit')
+                    @can('Editar reporte')
                     <a class="btn btn-primary" href="{{ route('reports.edit',$report->id) }}">Edit</a>
                     @endcan
 
 
                     @csrf
                     @method('DELETE')
-                    @can('report-delete')
+                    @can('Borrar reporte')
                     <button type="submit" class="btn btn-danger">Delete</button>
                     @endcan
                 </form>
