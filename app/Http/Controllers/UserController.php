@@ -52,7 +52,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nombre' => 'required',
+            'nombre' => 'required|unique:users,name',
             'email' => 'required|email|unique:users,email',
             'contraseña' => 'required|min:8|same:confirmar-contraseña|',
             'roles' => 'required'
@@ -73,7 +73,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+                        ->with('success','Usuario creado');
     }
     
     /**
@@ -119,7 +119,15 @@ class UserController extends Controller
             'roles' => 'required'
         ]);
     
-        $input = $request->all();
+        $input = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->contraseña,
+            'roles' => $request->roles,
+              
+        ];
+
+        //$input = $request->all();
         if(!empty($input['password'])){ 
             $input['password'] = Hash::make($input['password']);
         }else{
@@ -133,7 +141,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+                        ->with('success','El usuario ha sido actualizado');
     }
     
     /**

@@ -6,6 +6,7 @@ use App\Models\Report;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 { 
@@ -32,7 +33,7 @@ class ReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $reports = Report::latest()->paginate(5);
         return view('reports.index',compact('reports'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -44,8 +45,9 @@ class ReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('reports.create');
+    {   
+        $date = Carbon::now();
+        return view('reports.create',compact('date'));
     }
     
     /**
@@ -57,40 +59,35 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'fullName' => 'required|exists:customers',
-            'equipmentBrand' => 'required',
-            'equipmentModel' => 'required',
-            'equipmentSN' => 'required',
-            'equipmentAccesories' => '',
-            'reportedFail' => '',
-            'solution' => '',
-            'diagnosticCost' => 'numeric',
-            'finalCost' => 'numeric|nullable',
-            'entranceDate' => 'required',
-            'exitDate' => ''
+            'nombre' => 'required|exists:customers,fullName',
+            'marca' => 'required',
+            'modelo' => 'required',
+            'numeroserie' => 'required',
+            'accesorios' => '',
+            'fallo' => '',
+            'costodiagnostico' => 'numeric',
+            //'fechaentrada' => '',
         ]);
-        $id = Customer::where('fullName', $request->fullName)->first()->id;
-        $entranceDate = \Carbon\Carbon::parse($request->entranceDate);
-        $entranceDate->format('Y-m-d H:i:s');
-        $exitDate = \Carbon\Carbon::parse($request->exitDate);
-        $exitDate->format('Y-m-d H:i:s');
 
-        /*Report::create($request->all());*/
-        Report::create([
+        $id = Customer::where('fullName', $request->nombre)->first()->id;
+        //$entranceDate = Carbon::parse($request->fechaentrada);
+        $entranceDate = Carbon::now();
+        $entranceDate->format('Y-m-d H:i:s');
+
+        $input = [
             'customer_id' => $id,
-            'equipmentBrand' => $request->equipmentBrand,
-            'equipmentModel' => $request->equipmentModel,
-            'equipmentSN' => $request->equipmentSN,
-            'equipmentAccesories' => $request->equipmentAccesories,
-            'reportedFail' => $request->reportedFail,
-            'solution' => $request->solution,
-            'diagnosticCost' => $request->diagnosticCost,
-            'finalCost' => $request->finalCost,
+            'equipmentBrand' => $request->marca,
+            'equipmentModel' => $request->modelo,
+            'equipmentSN' => $request->numeroserie,
+            'equipmentAccesories' => $request->accesorios,
+            'reportedFail' => $request->fallo,
+            'diagnosticCost' => $request->costodiagnostico,
             'entranceDate' => $entranceDate,
-            'exitDate' => $exitDate,
-        ]);
+        ];
+        Report::create($input);
+
         return redirect()->route('reports.index')
-                        ->with('success','Report created successfully.');
+                        ->with('success','Se ha creado el reporte.');
     }
     
     /**

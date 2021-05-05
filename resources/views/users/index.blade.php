@@ -5,11 +5,11 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Users Management</h2>
+            <h2>Administrar usuario</h2>
         </div>
         <div class="pull-right">
           @can('Crear usuario')
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+            <a class="btn btn-success" href="{{ route('users.create') }}"> Crear usuario</a>
           @endcan
         </div>
     </div>
@@ -26,10 +26,10 @@
 <table class="table table-bordered">
  <tr>
    <th>No</th>
-   <th>Name</th>
+   <th>Nombre</th>
    <th>Email</th>
    <th>Roles</th>
-   <th width="280px">Action</th>
+   <th width="280px">Opciones</th>
  </tr>
  @foreach ($data as $key => $user)
   <tr>
@@ -44,13 +44,13 @@
       @endif
     </td>
     <td>
-      <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
+       <!--<a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Mostrar</a>-->
       @can('Editar usuario')
-        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
       @endcan
       @can('Borrar usuario')
         {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+            {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
       @endcan
         
@@ -62,6 +62,4 @@
 
 {!! $data->render() !!}
 
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection

@@ -55,16 +55,24 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'fullName' => 'required',
-            'business' => 'required',
+            'nombre' => 'required',
+            'negocio' => 'required',
             'email' => 'required| unique:customers,email',
-            'phone' => 'required| numeric'
+            'telefono' => 'required'
         ]);
-    
-        Customer::create($request->all());
+        
+        $input = [
+            'fullName' => $request->nombre,
+            'business' => $request->negocio,
+            'email' => $request->email,
+            'phone' => $request->telefono,
+              
+        ];
+
+        Customer::create($input);
     
         return redirect()->route('customers.index')
-                        ->with('success','Customer created successfully.');
+                        ->with('success','El cliente ha sido creado.');
     }
     
     /**
@@ -104,7 +112,15 @@ class CustomerController extends Controller
             'email' => 'required',
             'phone' => 'required'
         ]);
-    
+
+        $input = [
+            'fullName' => $request->nombre,
+            'business' => $request->negocio,
+            'email' => $request->email,
+            'phone' => $request->telefono,
+              
+        ];
+
         $customer->update($request->all());
     
         return redirect()->route('customers.index')

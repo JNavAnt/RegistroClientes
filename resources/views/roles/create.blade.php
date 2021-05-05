@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Create New Role</h2>
+            <h2>Crear rol</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Atras</a>
         </div>
     </div>
 </div>
@@ -16,7 +16,7 @@
 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <strong>Whoops!</strong> Hay un problema con sus datos.<br><br>
         <ul>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -30,13 +30,13 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+            <strong>Nombre:</strong>
+            {!! Form::text('nombre', null, array('placeholder' => 'Nombre','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Permission:</strong>
+            <strong>Permisos:</strong>
             <br/>
             
             <table class="">
@@ -44,7 +44,7 @@
                     <tr class="mr-3 ">
                         @foreach($chunkedValue as $value)
                             <td 
-                                class=""><label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
+                                class=""><label>{{ Form::checkbox('permiso[]', $value->id, false, array('class' => 'name')) }}
                                 {{ $value->name }}</label>
                             </td>
                             
@@ -61,5 +61,4 @@
 {!! Form::close() !!}
 
 
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
