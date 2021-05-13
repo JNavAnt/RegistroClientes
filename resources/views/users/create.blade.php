@@ -64,8 +64,8 @@
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <a class="btn btn-primary mr-4" href="{{ route('users.index') }}"> Back</a>
-        <button type="submit" class="btn btn-primary ml-4">Submit</button>
+        <a class="btn btn-primary mr-4" href="{{ route('users.index') }}"> Atras</a>
+        <button type="submit" class="btn btn-primary ml-4">Aceptar</button>
     </div>
 </div>
 {!! Form::close() !!}

@@ -28,7 +28,8 @@ class Report extends Model
         'diagnosticCost',
         'finalCost',
         'entranceDate',
-        'exitDate'
+        'exitDate',
+        'state_id'
     ];
 
     

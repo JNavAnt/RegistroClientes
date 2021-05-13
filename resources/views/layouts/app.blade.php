@@ -44,16 +44,16 @@
                             <li><a class="nav-link m-3" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                             @can('Mostrar usuario')
-                                <li><a class="nav-link m-3" href="{{ route('users.index') }}">Manage Users</a></li>
+                                <li><a class="nav-link m-3" href="{{ route('users.index') }}">Usuarios</a></li>
                             @endcan
                             @can('Mostrar rol')
-                                <li><a class="nav-link m-3" href="{{ route('roles.index') }}">Manage Role</a></li>
+                                <li><a class="nav-link m-3" href="{{ route('roles.index') }}">Roles</a></li>
                             @endcan
                             @can('Mostrar cliente')
-                                <li><a class="nav-link m-3" href="{{ route('customers.index') }}">Manage Customer</a></li>
+                                <li><a class="nav-link m-3" href="{{ route('customers.index') }}">Clientes</a></li>
                             @endcan
                             @can('Mostrar reporte')
-                                <li><a class="nav-link m-3" href="{{ route('reports.index') }}">Manage Report</a></li>
+                                <li><a class="nav-link m-3" href="{{ route('reports.index') }}">Reportes</a></li>
                             @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle m-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

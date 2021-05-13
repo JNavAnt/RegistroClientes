@@ -11,8 +11,18 @@
         </div>
     </div>
 
-
-    <div class="d-flex pb-4 mb-4">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    
+    <div class="d-flex">
         <div class="row mr-1" style="width: 50%;" >
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -78,12 +88,6 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group pb-4">
-                    <strong>Solucion:</strong>
-                    {{ $report->solution }}
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Costo de diagnostico:</strong>
                     {{ $report->diagnosticCost }}
@@ -91,31 +95,32 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Costo final:</strong>
-                    {{ $report->finalCost }}
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>entranceDate:</strong>
+                    <strong>Fecha de entrada:</strong>
                     {{ $report->entranceDate }}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>exitDate:</strong>
-                    {{ $report->exitDate }}
-                </div>
+        </div>
+    </div>
+    <form action="{{ route('reports.finish',$report->id) }}" method="POST">
+    	@csrf
+        @method('POST')
+        <div class="container p-0 d-flex mb-1">
+            <div class="form-group w-75 mr-3 p-0">
+                <strong>Solucion:</strong>
+                <textarea class="form-control" style="height:50px" name="solucion" placeholder="Solucion"></textarea>
             </div>
-
+            <div class="form-group w-25 align-self-center">
+                <strong>Costo final:</strong>
+                <input type="string" name="costoFinal" class="form-control" placeholder="Costo final" value="">
+            </div>
         </div>
-    </div>
-    <div class="d-flex  justify-content-center">
-        <div class=" mr-5">
-            <a class="btn btn-primary" href="{{ route('customers.index') }}"> Atras</a>
+        <div class="d-flex  justify-content-center">
+            <div class=" mr-5">
+                <a class="btn btn-primary" href="{{ route('reports.index') }}">Atras</a>
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+            </div>
         </div>
-        <div class="">
-            <a class="btn btn-primary" href="{{ route('reports.print', $report->id)}}"> Imprimir</a>
-        </div>
-    </div>
+    </form>
 @endsection

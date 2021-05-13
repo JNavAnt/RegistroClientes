@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 //print 
 Route::get('reports/{id}/print', [App\Http\Controllers\PDFController::class, 'print'])->name('reports.print');
+Route::get('reports/{id}/close', [App\Http\Controllers\ReportController::class, 'close'])->name('reports.close');
+Route::post('reports/{id}/close', [App\Http\Controllers\ReportController::class, 'finish'])->name('reports.finish');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

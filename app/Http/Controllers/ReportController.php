@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 
 class ReportController extends Controller
@@ -117,7 +116,10 @@ class ReportController extends Controller
      */
     public function edit(Report $report)
     {
-        return view('reports.edit',compact('report'));
+        //$date = $report->entranceDate->format('d/m/y h:i:s');
+        $date = \Carbon\Carbon::parse($report->entranceDate)->format('d/m/y h:i:s');
+        
+        return view('reports.edit',compact('report','date'));
     }
     
     /**
@@ -139,7 +141,7 @@ class ReportController extends Controller
             'solution' => '',
             'diagnosticCost' => 'numeric',
             'finalCost' => 'numeric|nullable',
-            'entranceDate' => 'required',
+            'entranceDate' => '',
             'exitDate' => ''
         ]);
         
@@ -168,6 +170,37 @@ class ReportController extends Controller
                         ->with('success','Report updated successfully');
     }
     
+    /* 
+        Show the form for closng the specified report.
+    */ 
+
+    public function close($id)
+    {
+        $report = Report::find($id);
+        return view('reports.close',compact('report'));
+    }
+
+    public function finish(Request $request, $id)
+    {
+        $report = Report::find($id);
+         request()->validate([
+            'solucion' => 'required',
+            'costoFinal' => 'required'
+        ]);
+        
+        $exitDate = Carbon::now();
+        $exitDate->format('Y-m-d H:i:s');
+        /*$report->update($request->all());*/
+        $report->update([
+            'solution' => $request->solucion,
+            'finalCost' => $request->costoFinal,
+            'exitDate' => $exitDate,
+            'state_id' => 3
+        ]);
+    
+        return redirect()->route('reports.index')
+                        ->with('success','Report closed successfully');
+    }
     /**
      * Remove the specified resource from storage.
      *

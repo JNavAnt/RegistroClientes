@@ -2,7 +2,7 @@
 
 
 @section('content')
-<div class="row">
+<div class="row mb-4">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Administrar usuario</h2>
