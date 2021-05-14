@@ -11,38 +11,42 @@
     </div>
 
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @if (count($errors) > 0)
+    <script>var message = ""</script>
+    @foreach ($errors->all() as $error)
+        <script>message += "{{$error}}<br>"</script>
+    @endforeach
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            //text: message
+            html: message
+        })
+    </script>
+	@endif
 
 
-    <form action="{{ route('reports.finish',$report->id) }}" method="POST">
+    <form action="{{ route('reports.update',$report->id) }}" method="POST">
     	@csrf
         @method('PUT')
 		<div class="d-flex justify-content-between mb-0">
 		    <div class="mr-5 " style="width: 33%">
 		        <div class="form-group" style="margin-bottom: 40px;">
 		            <strong>Nombre del cliente:</strong>
-					<input type="text" name="fullName" class="form-control" placeholder="Customer name" value={{ $report->customer->fullName }}>
+					<input type="text" name="fullName" class="form-control" placeholder="Customer name" value="{{ $report->customer->fullName }}">
 		        </div>
 				<div class="form-group" style="margin-bottom: 40px;">
 		            <strong>Marca:</strong>
-					<input type="text" name="equipmentBrand" class="form-control" placeholder="equipmentBrand" value={{ $report->equipmentBrand }}>
+					<input type="text" name="equipmentBrand" class="form-control" placeholder="equipmentBrand" value="{{$report->equipmentBrand}}">
 		        </div>
 				<div class="form-group" style="margin-bottom: 40px;">
 		            <strong>Modelo:</strong>
-					<input type="string" name="equipmentModel" class="form-control" placeholder="equipmentModel" value={{ $report->equipmentModel}}>
+					<input type="string" name="equipmentModel" class="form-control" placeholder="equipmentModel" value="{{ $report->equipmentModel}}">
 		        </div>
 				<div class="form-group mb-0">
 		            <strong>Numero de serie:</strong>
-					<input type="string" name="equipmentSN" class="form-control" placeholder="equipmentSN" value={{ $report->equipmentSN}}> 
+					<input type="string" name="equipmentSN" class="form-control" placeholder="equipmentSN" value="{{ $report->equipmentSN}}"> 
 		        </div>
 		    </div>
             <div class="flex-column" style="width: 66%;">

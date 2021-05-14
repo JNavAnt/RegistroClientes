@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Registro Clientes') }}</title>
+    <title>{{ config('app.name', 'Itech Registro Clientes') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('public/js/app.js') }}" defer></script>
+    <!--sweetalert--><script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.min.js" integrity="sha512-CrNI25BFwyQ47q3MiZbfATg0ZoG6zuNh2ANn/WjyqvN4ShWfwPeoCOi9pjmX4DoNioMQ5gPcphKKF+oVz3UjRw==" crossorigin="anonymous"></script>
     <!--todo: Buscar las versiones mas recientes de jquery y bootstrap-->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -16,15 +17,17 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--sweetalert--><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.min.css" integrity="sha512-/D4S05MnQx/q7V0+15CCVZIeJcV+Z+ejL1ZgkAcXE1KZxTE4cYDvu+Fz+cQO9GopKrDzMNNgGK+dbuqza54jgw==" crossorigin="anonymous" />
 </head>
-<body>
+<body class="text-light" style="background-color: #151519;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container flex justify-between">
-                <a class="navbar-brand" href="{{ url('/') }}">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #000000; ">
+            <div class="container flex justify-between ">
+                <a class="navbar-brand text-light" href="{{ url('/') }}">
                 Registro Clientes
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,22 +43,22 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link m-3" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link m-3" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            <li><a class="nav-link m-3 text-light" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            <!--<li><a class="nav-link m-3" href="{{ route('register') }}">{{ __('Register') }}</a></li>-->
                         @else
                             @can('Mostrar usuario')
-                                <li><a class="nav-link m-3" href="{{ route('users.index') }}">Usuarios</a></li>
+                                <li><a class="nav-link m-3 text-light" href="{{ route('users.index') }}">Usuarios</a></li>
                             @endcan
                             @can('Mostrar rol')
-                                <li><a class="nav-link m-3" href="{{ route('roles.index') }}">Roles</a></li>
+                                <li><a class="nav-link m-3 text-light" href="{{ route('roles.index') }}">Roles</a></li>
                             @endcan
                             @can('Mostrar cliente')
-                                <li><a class="nav-link m-3" href="{{ route('customers.index') }}">Clientes</a></li>
+                                <li><a class="nav-link m-3 text-light" href="{{ route('customers.index') }}">Clientes</a></li>
                             @endcan
                             @can('Mostrar reporte')
-                                <li><a class="nav-link m-3" href="{{ route('reports.index') }}">Reportes</a></li>
+                                <li><a class="nav-link m-3 text-light" href="{{ route('reports.index') }}">Reportes</a></li>
                             @endcan
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown text-light">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle m-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>

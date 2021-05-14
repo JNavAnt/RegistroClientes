@@ -8,21 +8,25 @@
             <h2>Editar rol</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Atras</a>
+            
         </div>
     </div>
 </div>
 
 
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> Hay un problema con sus datos.<br><br>
-        <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-        </ul>
-    </div>
+    <script>var message = ""</script>
+    @foreach ($errors->all() as $error)
+        <script>message += "{{$error}}<br>"</script>
+    @endforeach
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            //text: message
+            html: message
+        })
+    </script>
 @endif
 
 
@@ -38,11 +42,6 @@
         <div class="form-group">
             <strong>Permisos:</strong>
             <br/>
-            <!--@foreach($permission as $value)
-                <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                {{ $value->name }}</label>
-            <br/>
-            @endforeach-->
             <table class="">
                 @foreach($permission->chunk(4) as $chunkedValue)
                     <tr class="mr-3 ">
@@ -59,7 +58,8 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-primary" href="{{ route('roles.index') }}"> Atras</a>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
     </div>
 </div>
 {!! Form::close() !!}

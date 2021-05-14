@@ -17,9 +17,13 @@
 
 
 @if ($message = Session::get('success'))
-<div class="alert alert-success">
-  <p>{{ $message }}</p>
-</div>
+  <script>
+      Swal.fire({
+                icon: 'success',
+                title: 'Operacion exitosa',
+                text: "{{$message}}"
+            })
+  </script>
 @endif
 
 
@@ -28,8 +32,8 @@
    <th>No</th>
    <th>Nombre</th>
    <th>Email</th>
-   <th>Roles</th>
-   <th width="280px">Opciones</th>
+   <th width="10%">Roles</th>
+   <th width="15%">Opciones</th>
  </tr>
  @foreach ($data as $key => $user)
   <tr>

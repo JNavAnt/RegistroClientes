@@ -86,7 +86,7 @@ class ReportController extends Controller
         Report::create($input);
 
         return redirect()->route('reports.index')
-                        ->with('success','Se ha creado el reporte.');
+                        ->with('success','El reporte ha sido creado.');
     }
     
     /**
@@ -118,7 +118,7 @@ class ReportController extends Controller
     {
         //$date = $report->entranceDate->format('d/m/y h:i:s');
         $date = \Carbon\Carbon::parse($report->entranceDate)->format('d/m/y h:i:s');
-        
+        //$customer = $report = Customer::find($report->customer->id);
         return view('reports.edit',compact('report','date'));
     }
     
@@ -167,7 +167,7 @@ class ReportController extends Controller
         ]);
     
         return redirect()->route('reports.index')
-                        ->with('success','Report updated successfully');
+                        ->with('success','El reporte ha sido actualizado');
     }
     
     /* 
@@ -199,7 +199,7 @@ class ReportController extends Controller
         ]);
     
         return redirect()->route('reports.index')
-                        ->with('success','Report closed successfully');
+                        ->with('success','El reporte ha sido cerrado');
     }
     /**
      * Remove the specified resource from storage.
@@ -212,7 +212,7 @@ class ReportController extends Controller
         $report->delete();
     
         return redirect()->route('reports.index')
-                        ->with('success','Report deleted successfully');
+                        ->with('success','El reporte ha sido borrado');
     }
 
     

@@ -17,9 +17,13 @@
 
 
 @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
+  <script>
+      Swal.fire({
+                icon: 'success',
+                title: 'Operacion exitosa',
+                text: "{{$message}}"
+            })
+  </script>
 @endif
 
 

@@ -124,7 +124,7 @@ class CustomerController extends Controller
         $customer->update($request->all());
     
         return redirect()->route('customers.index')
-                        ->with('success','Customer updated successfully');
+                        ->with('success','El cliente ha sido actualizado');
     }
     
     /**
@@ -138,6 +138,6 @@ class CustomerController extends Controller
         $customer->delete();
     
         return redirect()->route('customers.index')
-                        ->with('success','Customer deleted successfully');
+                        ->with('success','El cliente ha sido borrado');
     }
 }

@@ -16,23 +16,27 @@
     </div>
 
 
+    
     @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
+    <script>
+        Swal.fire({
+                    icon: 'success',
+                    title: 'Operacion exitosa',
+                    text: "{{$message}}"
+                })
+    </script>
     @endif
-
 
     <table class="table table-bordered">
         <tr>
             <th width = "5%">No</th>
             <th>Cliente</th>
-            <th width = "12%">Marca</th>
+            <th width = "11%">Marca</th>
             <th width = "10%">Modelo</th>
             <th width = "10%">S/N</th>
             <th width = "14%" >Fecha de entrada</th>
             <th width = "7%" >Estado</th>
-            <th width="200px">Opciones</th>
+            <th width="210px">Opciones</th>
         </tr>
 	    @foreach ($reports as $report)
 	    <tr>

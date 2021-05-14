@@ -14,16 +14,20 @@
     </div>
 
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> Hay un problema con sus datos.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @if (count($errors) > 0)
+    <script>var message = ""</script>
+    @foreach ($errors->all() as $error)
+        <script>message += "{{$error}}<br>"</script>
+    @endforeach
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            //text: message
+            html: message
+        })
+    </script>
+@endif
 
 
     <!--<form action="{{ route('reports.store') }}" method="POST">-->

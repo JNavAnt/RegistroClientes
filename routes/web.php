@@ -20,7 +20,8 @@ use App\Http\Controllers\ReportController;
 */
 
 Route::get('/', function () {
-    return view('layouts/app');
+    //return view('layouts/app');
+    return view('dashboard');
 });
 
 

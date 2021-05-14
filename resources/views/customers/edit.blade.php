@@ -14,15 +14,19 @@
     </div>
 
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> Hay un problema con sus datos.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    @if (count($errors) > 0)
+    <script>var message = ""</script>
+    @foreach ($errors->all() as $error)
+        <script>message += "{{$error}}<br>"</script>
+    @endforeach
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            //text: message
+            html: message
+        })
+    </script>
     @endif
 
 
@@ -57,7 +61,8 @@
 		        </div>
 		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		      <button type="submit" class="btn btn-primary">Aceptar</button>
+                <a class="btn btn-primary" href="{{ route('customers.index') }}"> Atras</a>
+		        <button type="submit" class="btn btn-primary">Aceptar</button>
 		    </div>
 		</div>
 

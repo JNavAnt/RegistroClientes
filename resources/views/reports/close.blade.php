@@ -11,15 +11,19 @@
         </div>
     </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    @if (count($errors) > 0)
+    <script>var message = ""</script>
+    @foreach ($errors->all() as $error)
+        <script>message += "{{$error}}<br>"</script>
+    @endforeach
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            //text: message
+            html: message
+        })
+    </script>
     @endif
     
     <div class="d-flex">

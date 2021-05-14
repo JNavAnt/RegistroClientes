@@ -112,7 +112,7 @@
     </div>
     <div class="d-flex  justify-content-center">
         <div class=" mr-5">
-            <a class="btn btn-primary" href="{{ route('customers.index') }}"> Atras</a>
+            <a class="btn btn-primary" href="{{ route('reports.index') }}"> Atras</a>
         </div>
         <div class="">
             <a class="btn btn-primary" href="{{ route('reports.print', $report->id)}}"> Imprimir</a>
