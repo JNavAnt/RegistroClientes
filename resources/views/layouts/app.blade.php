@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Itech Registro Clientes') }}</title>
+    <link rel="icon" href="{!! asset('public/favicon.ico') !!}"/>
+    <!--<title>{{ config('app.name', 'Itech Registro Clientes') }}</title>-->
+    <title>Itech</title>
     <!-- Scripts -->
     <script src="{{ asset('public/js/app.js') }}" defer></script>
     <!--sweetalert--><script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.16.6/sweetalert2.min.js" integrity="sha512-CrNI25BFwyQ47q3MiZbfATg0ZoG6zuNh2ANn/WjyqvN4ShWfwPeoCOi9pjmX4DoNioMQ5gPcphKKF+oVz3UjRw==" crossorigin="anonymous"></script>
@@ -25,10 +27,10 @@
 </head>
 <body class="text-light" style="background-color: #151519;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #000000; ">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel m-0 p-0" style="background-color: #000000; height: 80px;">
             <div class="container flex justify-between ">
                 <a class="navbar-brand text-light" href="{{ url('/') }}">
-                Registro Clientes
+                    <img style="width: 30%;" src="{{asset('public\assets\iTech-Logo-2021-2.png')}}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -40,7 +42,7 @@
 
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto align-items-center">
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link m-3 text-light" href="{{ route('login') }}">{{ __('Login') }}</a></li>
@@ -59,8 +61,8 @@
                                 <li><a class="nav-link m-3 text-light" href="{{ route('reports.index') }}">Reportes</a></li>
                             @endcan
                             <li class="nav-item dropdown text-light">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle m-3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle m-3 text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret "></span>
                                 </a>
                                 <div class="dropdown-menu m-3" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"

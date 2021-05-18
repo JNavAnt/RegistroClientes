@@ -3,9 +3,9 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12 margin-tb">
+    <div class="col-lg-12 margin-tb mb-4 ">
         <div class="pull-left">
-            <h2>Edit New User</h2>
+            <h2>Editar usuario</h2>
         </div>
         <div class="pull-right">
             
@@ -30,8 +30,8 @@
 
 
 {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
-<div class="container d-flex justify-content-around">
-    <div class="row w-50 m-4">
+<div class="container d-flex justify-content-around mb-3">
+    <div class="row w-50 mr-4 ml-auto">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre:</strong>
@@ -58,7 +58,7 @@
         </div>
         
     </div>
-    <div class="row row w-50 h-100 m-4">
+    <div class="row row w-50 h-100 ml-auto mr-auto">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Rol:</strong>
@@ -69,8 +69,8 @@
     </div>
 </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <a class="btn btn-primary" href="{{ route('users.index') }}"> Atras</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-danger mr-4" href="{{ route('users.index') }}" style="width: 100px;"> Atras</a>
+        <button type="submit" class="btn btn-primary ml-4" style="width: 100px;background-color: #011753;">Aceptar</button>
 
     </div>
 {!! Form::close() !!}

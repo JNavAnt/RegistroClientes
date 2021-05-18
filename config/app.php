@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env(/*'APP_NAME',*/ 'Itech Registro Clientes'),
+    'name' => env('Itech Registro Clientes'),
 
     /*
     |--------------------------------------------------------------------------

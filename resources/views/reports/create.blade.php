@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
+        <div class="col-lg-12 margin-tb mb-4">
             <div class="pull-left">
                 <h2>Crear reporte</h2>
             </div>
@@ -70,8 +70,8 @@
 		    </div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-			<a class="btn btn-primary" href="{{ route('reports.index') }}">Atras</a>
-		    <button type="submit" class="btn btn-primary">Aceptar</button>
+			<a class="btn btn-danger" href="{{ route('reports.index') }}" style="width: 100px; ">Atras</a>
+		    <button type="submit" class="btn btn-primary" style="width: 100px; background-color: #011753">Aceptar</button>
 		</div>
 
 	{!! Form::close() !!}
