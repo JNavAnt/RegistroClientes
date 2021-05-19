@@ -27,7 +27,18 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::orderBy('id','DESC')->paginate(5);
+        $data = User::where([
+            ['name', '!=', Null],
+            [function($query) use ($request){
+                if (($term = $request->term)){
+                    $query->orWhere('name', 'LIKE', '%'.$term.'%')->get();
+                }
+            }]
+        ])
+            ->orderBy("id","desc")
+            ->paginate(10);
+
+        //$data = User::orderBy('id','DESC')->paginate(5);
         return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }

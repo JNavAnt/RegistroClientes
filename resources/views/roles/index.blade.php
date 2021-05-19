@@ -7,10 +7,32 @@
         <div class="pull-left ">
             <h2 class="mb-3">Administrar roles</h2>
         </div>
-        <div class="pull-right">
-        @can('Crear rol')
-            <a class="btn btn-success mb-4" href="{{ route('roles.create') }}"> Crear rol</a>
+        
+        <div class="d-flex justify-content-between">
+            <div class="pull-right">
+            @can('Crear rol')
+                <a class="btn btn-success mb-4" href="{{ route('roles.create') }}"> Crear rol</a>
             @endcan
+            </div>
+            <div class="">
+                <form action="{{ route('roles.index') }}" method="GET" role="search">
+                    <div class="input-group">
+                        <span class="input-group-btn mr-2">
+                            <button class="btn btn-info" type="submit" title="Search users">
+                                <span class="fas fa-search">Buscar</span>
+                            </button>
+                        </span>
+                        <input type="text" class="form-control mr-2" name="term" placeholder="Search users" id="term">
+                        <a href="{{ route('roles.index') }}" >
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="button" title="Refresh page">
+                                    <span class="fas fa-sync-alt">Actualizar</span>
+                                </button>
+                          </span>
+                        </a>
+                      </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

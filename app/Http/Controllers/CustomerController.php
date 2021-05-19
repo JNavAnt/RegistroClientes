@@ -14,10 +14,6 @@ class CustomerController extends Controller
      */
     function __construct()
     {
-         /*$this->middleware('permission:customer-list|customer-create|customer-edit|customer-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:customer-create', ['only' => ['create','store']]);
-         $this->middleware('permission:customer-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:customer-delete', ['only' => ['destroy']]);*/
 
         $this->middleware('permission:Mostrar cliente|Crear cliente|Editar cliente|Borrar cliente', ['only' => ['index','store']]);
         $this->middleware('permission:Crear cliente', ['only' => ['create','store']]);
@@ -29,9 +25,19 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::latest()->paginate(5);
+        $customers = Customer::where([
+            ['fullName', '!=', Null],
+            [function($query) use ($request){
+                if (($term = $request->term)){
+                    $query->orWhere('fullName', 'LIKE', '%'.$term.'%')->get();
+                }
+            }]
+        ])
+            ->orderBy("id","desc")
+            ->paginate(10);
+        //$customers = Customer::latest()->paginate(5);
         return view('customers.index',compact('customers'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -135,9 +141,19 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer->delete();
+
+        
+
+        $customerRel = Customer::has('report')->find($customer->id);
+        if($customerRel != null){
+            return redirect()->route('customers.index')
+                            ->with('error','El cliente no puede ser borrado, existen reportes ligados a este');
+        }else{
+            $customer->delete();
     
-        return redirect()->route('customers.index')
-                        ->with('success','El cliente ha sido borrado');
+            return redirect()->route('customers.index')
+                            ->with('success','El cliente ha sido borrado');
+        }
+        
     }
 }

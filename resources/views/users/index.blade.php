@@ -7,11 +7,32 @@
         <div class="pull-left">
             <h2>Administrar usuario</h2>
         </div>
-        <div class="pull-right">
-          @can('Crear usuario')
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Crear usuario</a>
-          @endcan
-        </div>
+          <div class="d-flex justify-content-between">
+              <div class="pull-right">
+                @can('Crear usuario')
+                  <a class="btn btn-success" href="{{ route('users.create') }}"> Crear usuario</a>
+                @endcan
+              </div>
+              <div class="">
+                  <form action="{{ route('users.index') }}" method="GET" role="search">
+                      <div class="input-group">
+                        <span class="input-group-btn mr-2">
+                          <button class="btn btn-info" type="submit" title="Search users">
+                            <span class="fas fa-search">Buscar</span>
+                          </button>
+                        </span>
+                        <input type="text" class="form-control mr-2" name="term" placeholder="Search users" id="term">
+                        <a href="{{ route('users.index') }}" >
+                          <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button" title="Refresh page">
+                              <span class="fas fa-sync-alt">Actualizar</span>
+                            </button>
+                          </span>
+                        </a>
+                      </div>
+                  </form>
+              </div>
+          </div>
     </div>
 </div>
 

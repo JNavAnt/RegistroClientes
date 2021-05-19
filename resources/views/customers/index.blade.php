@@ -7,10 +7,31 @@
             <div class="pull-left">
                 <h2>Administrar clientes</h2>
             </div>
-            <div class="pull-right">
-                @can('Crear cliente')
-                <a class="btn btn-success mb-4" href="{{ route('customers.create') }}"> Crear cliente</a>
-                @endcan
+            <div class="d-flex justify-content-between">
+                <div class="pull-right">
+                    @can('Crear cliente')
+                    <a class="btn btn-success mb-4" href="{{ route('customers.create') }}"> Crear cliente</a>
+                    @endcan
+                </div>
+                <div class="">
+                    <form action="{{ route('customers.index') }}" method="GET" role="search">
+                        <div class="input-group">
+                            <span class="input-group-btn mr-2">
+                                <button class="btn btn-info" type="submit" title="Search customers">
+                                    <span class="fas fa-search">Buscar</span>
+                                </button>
+                            </span>
+                            <input type="text" class="form-control mr-2" name="term" placeholder="Search customers" id="term">
+                            <a href="{{ route('customers.index') }}" >
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button" title="Refresh page">
+                                        <span class="fas fa-sync-alt">Actualizar</span>
+                                    </button>
+                            </span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -25,7 +46,15 @@
                 })
     </script>
     @endif
-
+    @if ($message = Session::get('error'))
+    <script>
+        Swal.fire({
+                    icon: 'error',
+                    title: 'Ocurrio un',
+                    text: "{{$message}}"
+                })
+    </script>
+    @endif
 
     <table class="table table-bordered bg-light text-dark ">
         <tr class="text-center">
