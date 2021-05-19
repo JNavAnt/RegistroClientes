@@ -6,6 +6,7 @@ use App\Models\Report;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 { 
@@ -31,11 +32,30 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $reports = Report::latest()->paginate(5);
+        
+        $customer = Customer::where([
+            ['fullName', '!=', Null],
+            [function($query) use ($request){
+                if (($term = $request->term)){
+                    $query->orWhere('fullName', 'LIKE', '%'.$term.'%')->get();
+                }
+            }]
+        ])
+            ->orderBy("id","desc")
+            ->paginate(10);
+
+        $reports = Report::where(
+            function ($query) use ($customer) {
+                foreach($customer as $customer) {
+                    $query->orWhere('customer_id', '=', "$customer->id")->get();
+                }
+        })->orderBy("id","desc")
+        ->paginate(10);
+
         return view('reports.index',compact('reports'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 10);
     }
     
     /**

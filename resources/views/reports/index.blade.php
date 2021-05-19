@@ -7,10 +7,31 @@
             <div class="pull-left">
                 <h2>Administrar reportes</h2>
             </div>
-            <div class="pull-right">
-                @can('Crear reporte')
-                <a class="btn btn-success" href="{{ route('reports.create') }}">Crear reporte</a>
-                @endcan
+            <div class="d-flex justify-between">
+                <div class="pull-right">
+                    @can('Crear reporte')
+                    <a class="btn btn-success" href="{{ route('reports.create') }}">Crear reporte</a>
+                    @endcan
+                </div>
+                <div class="">
+                    <form action="{{ route('reports.index') }}" method="GET" role="search">
+                        <div class="input-group">
+                            <span class="input-group-btn mr-2">
+                                <button class="btn btn-info" type="submit" title="Search reports">
+                                    <span class="fas fa-search">Buscar</span>
+                                </button>
+                            </span>
+                            <input type="text" class="form-control mr-2" name="term" placeholder="Search reports" id="term">
+                            <a href="{{ route('reports.index') }}" >
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button" title="Refresh page">
+                                        <span class="fas fa-sync-alt">Actualizar</span>
+                                    </button>
+                            </span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
