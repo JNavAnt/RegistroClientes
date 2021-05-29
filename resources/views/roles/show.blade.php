@@ -26,8 +26,8 @@
                     @foreach($rolePermissions->chunk(4) as $chunkedValue)
                         <tr class="mr-3 ">
                             @foreach($chunkedValue as $value)
-                                <td class="">   
-                                    <label class="label label-success">{{ $value->name }}</label>             
+                                <td class=" ">   
+                                    <label class="label label-success m-2">{{ $value->name }}</label>             
                                 </td>
                                 
                             @endforeach

@@ -58,20 +58,20 @@
 					{!! Form::text('costodagnostico', null, array('placeholder' => 'Costo de diagnostico','class' => 'form-control')) !!}
 		        </div>
 		    </div>
-            <div class="flex-column" style="width: 66%;">
-		        <div class="form-group h-50">
+            <div class="flex-column d-flex" style="width: 66%;">
+		        <div class="form-group">
 		            <strong>Accesorios:</strong>
 					{!! Form::textArea('accesorios', null, array('placeholder' => 'Accesorios','class' => 'form-control', 'rows' => 5)) !!}
 		        </div>
-				<div class="form-group h-50 align-self-end">
+				<div class="form-group mt-auto">
 		            <strong>Fallo reportado:</strong>
 					{!! Form::textArea('fallo', null, array('placeholder' => 'Fallo reportado','class' => 'form-control', 'rows' => 5)) !!}
 		        </div>
 		    </div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-			<a class="btn btn-danger" href="{{ route('reports.index') }}" style="width: 100px; ">Atras</a>
-		    <button type="submit" class="btn btn-primary" style="width: 100px; background-color: #011753">Aceptar</button>
+			<a class="btn btn-danger mr-4" href="{{ route('reports.index') }}" style="width: 100px; ">Atras</a>
+		    <button type="submit" class="btn btn-primary ml-4" style="width: 100px;">Aceptar</button>
 		</div>
 
 	{!! Form::close() !!}

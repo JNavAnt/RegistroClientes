@@ -27,10 +27,10 @@
     @endif
 
 
-    <form class="m-auto w-75" action="{{ route('customers.update',$customer->id) }}" method="POST">
+    <form class="m-auto " action="{{ route('customers.update',$customer->id) }}" method="POST">
     	@csrf
         @method('PUT')
-         <div class="row">
+         <div class="row w-75 m-auto">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Nombre completo:</strong>
@@ -55,11 +55,14 @@
                     <input type="text" name="phone" value="{{ $customer->phone }}" class="form-control" placeholder="Telefono">
 		        </div>
 		    </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <a class="btn btn-danger mr-4" href="{{ route('customers.index') }}" style="width: 100px; "> Atras</a>
-		        <button type="submit" class="btn btn-primary ml-4" style="width: 100px; background-color: #011753">Aceptar</button>
-		    </div>
+		    
 		</div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <a class="btn btn-danger m-3" href="{{ route('customers.index') }}" style="width: 100px; "> Atras</a>
+		        <button type="submit" class="btn btn-primary m-3" style="width: 100px;">Aceptar</button>
+		    </div>
+        </div>
 
 
     </form>

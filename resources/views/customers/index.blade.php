@@ -10,7 +10,7 @@
             <div class="d-flex justify-content-between">
                 <div class="pull-right">
                     @can('Crear cliente')
-                    <a class="btn btn-success mb-4" href="{{ route('customers.create') }}"> Crear cliente</a>
+                    <a class="btn btn-success mb-4 mr-2" href="{{ route('customers.create') }}"> Crear cliente</a>
                     @endcan
                 </div>
                 <div class="">
@@ -21,14 +21,14 @@
                                     <span class="fas fa-search">Buscar</span>
                                 </button>
                             </span>
-                            <input type="text" class="form-control mr-2" name="term" placeholder="Search customers" id="term">
-                            <a href="{{ route('customers.index') }}" >
+                            <input type="text" class="form-control" name="term" placeholder="Search customers" id="term">
+                            <!--<a href="{{ route('customers.index') }}" >
                                 <span class="input-group-btn">
                                     <button class="btn btn-danger" type="button" title="Refresh page">
                                         <span class="fas fa-sync-alt">Actualizar</span>
                                     </button>
                             </span>
-                            </a>
+                            </a>-->
                         </div>
                     </form>
                 </div>
@@ -55,41 +55,43 @@
                 })
     </script>
     @endif
+    <div style="overflow-x:auto;">
+        <table class="table table-bordered bg-light text-dark ">
+            <tr class="text-center">
+                <th width="10%">No</th>
+                <th>Nombre</th>
+                <th>Negocio</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th width="180px">Action</th>
+            </tr>
+            @foreach ($customers as $customer)
+            <tr>
+                <td class="text-center align-middle">{{ ++$i }}</td>
+                <td class="align-middle">{{ $customer->fullName }}</td>
+                <td class="align-middle">{{ $customer->business }}</td>
+                <td class="align-middle">{{ $customer->email }}</td>
+                <td class="align-middle">{{ $customer->phone }}</td>
+                <td class="text-center align-middle">
+                    <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
+                        <!--<a class="btn btn-info" href="{{ route('customers.show',$customer->id) }}">Mostrar</a>-->
+                        @can('Editar cliente')
+                            <a class="btn btn-primary m-1" href="{{ route('customers.edit',$customer->id) }}" style="width: 75px">Editar</a>
+                        @endcan
 
-    <table class="table table-bordered bg-light text-dark ">
-        <tr class="text-center">
-            <th width="10%">No</th>
-            <th>Nombre</th>
-            <th>Negocio</th>
-            <th>Email</th>
-            <th>Telefono</th>
-            <th width="180px">Action</th>
-        </tr>
-	    @foreach ($customers as $customer)
-	    <tr>
-	        <td class="text-center align-middle">{{ ++$i }}</td>
-	        <td class="align-middle">{{ $customer->fullName }}</td>
-	        <td class="align-middle">{{ $customer->business }}</td>
-            <td class="align-middle">{{ $customer->email }}</td>
-            <td class="align-middle">{{ $customer->phone }}</td>
-	        <td class="text-center align-middle">
-                <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
-                    <!--<a class="btn btn-info" href="{{ route('customers.show',$customer->id) }}">Mostrar</a>-->
-                    @can('Editar cliente')
-                        <a class="btn btn-primary" href="{{ route('customers.edit',$customer->id) }}" style="background-color: #011753;">Editar</a>
-                    @endcan
 
-
-                    @csrf
-                    @method('DELETE')
-                    @can('Borrar cliente')
-                        <button type="submit" class="btn btn-danger">Borrar</button>
-                    @endcan
-                </form>
-	        </td>
-	    </tr>
-	    @endforeach
-    </table>
+                        @csrf
+                        @method('DELETE')
+                        @can('Borrar cliente')
+                            <button type="submit" class="btn btn-danger m-1" style="width: 75px">Borrar</button>
+                        @endcan
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </table>
+    </div>
+    
 
 
     {!! $customers->links() !!}

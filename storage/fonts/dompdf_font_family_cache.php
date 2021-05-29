@@ -82,4 +82,7 @@
     'normal' => $fontDir . '/raleway_normal_09f70b929840bd78bbaeebfd567b418b',
     '600' => $fontDir . '/raleway_600_905121d8242dd21fbdcb2665a43c2dcc',
   ),
+  'roboto' => array(
+    'italic' => $fontDir . '/roboto_italic_6b0e8e7914df114ecb211c66b5625d19',
+  ),
 ) ?>

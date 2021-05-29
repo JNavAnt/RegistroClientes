@@ -58,7 +58,7 @@
         </div>
         
     </div>
-    <div class="row row w-50 h-100 ml-auto mr-auto">
+    <div class="row w-50 h-100 ml-auto mr-auto">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Rol:</strong>
@@ -70,7 +70,7 @@
 </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <a class="btn btn-danger mr-4" href="{{ route('users.index') }}" style="width: 100px;"> Atras</a>
-        <button type="submit" class="btn btn-primary ml-4" style="width: 100px;background-color: #011753;">Aceptar</button>
+        <button type="submit" class="btn btn-primary ml-4" style="width: 100px;">Aceptar</button>
 
     </div>
 {!! Form::close() !!}

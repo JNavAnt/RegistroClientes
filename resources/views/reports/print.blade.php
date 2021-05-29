@@ -8,14 +8,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Registro Clientes') }}</title>
     <!-- Scripts -->
-    <script src="{{ asset('resources/js/app.js') }}" defer></script>
+    <!--<script src="{{ asset('resources/js/app.js') }}" defer></script>-->
     <!--todo: Buscar las versiones mas recientes de jquery y bootstrap-->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet">  
     <!-- Styles -->
     <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet">
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
@@ -26,11 +28,8 @@
 </head>
 <body >
     <div class="d-flex" >
-        <!--"
-        
-    -->
-        <i style="float: left; width: 25%; height: 10%; background-color: #cc6633">Logo</i>
-        <div class="title" >ATENCION DE SERVICIO</div>
+        <img style="float: left; width: 35%; margin: auto " src="http://localhost/colection/RegistroClientes/public/assets/iTech-Logo-2021-2.png"/>
+        <div class="title"  >ATENCION DE SERVICIO</div>
         <br>
     </div>
     <div style="margin: 0; float: right; ">

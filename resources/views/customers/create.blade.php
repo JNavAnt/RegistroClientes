@@ -27,11 +27,11 @@
     @endif
 
 
-    <form class="w-75 m-auto" action="{{ route('customers.store') }}" method="POST">
+    <form class=" m-auto" action="{{ route('customers.store') }}" method="POST">
     	@csrf
 
 
-         <div class="row">
+         <div class="row w-75  m-auto">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Nombre completo:</strong>
@@ -58,12 +58,15 @@
 		    </div>
             
             
-		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-				<a class="btn btn-danger mr-4" href="{{ route('customers.index') }} " style="width: 100px; ">Atras</a>
-		        <button type="submit" class="btn btn-primary ml-4" style="width: 100px; background-color: #011753">Aceptar</button>
-		    </div>
+		    
+			
 		</div>
-
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+				<a class="btn btn-danger m-3" href="{{ route('customers.index') }}" style="width: 100px;"> Atras</a>
+				<button type="submit" class="btn btn-primary m-3" style="width: 100px;">Aceptar</button>
+			</div>
+		</div>
 
     </form>
 

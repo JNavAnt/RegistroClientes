@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-between">
             <div class="pull-right">
             @can('Crear rol')
-                <a class="btn btn-success mb-4" href="{{ route('roles.create') }}"> Crear rol</a>
+                <a class="btn btn-success mb-4 mr-2" href="{{ route('roles.create') }}"> Crear rol</a>
             @endcan
             </div>
             <div class="">
@@ -23,13 +23,13 @@
                             </button>
                         </span>
                         <input type="text" class="form-control mr-2" name="term" placeholder="Search users" id="term">
-                        <a href="{{ route('roles.index') }}" >
+                        <!--<a href="{{ route('roles.index') }}" >
                             <span class="input-group-btn">
                                 <button class="btn btn-danger" type="button" title="Refresh page">
                                     <span class="fas fa-sync-alt">Actualizar</span>
                                 </button>
                           </span>
-                        </a>
+                        </a>-->
                       </div>
                 </form>
             </div>
@@ -49,30 +49,32 @@
 @endif
 
 
-<table class="table table-bordered bg-light text-dark w-75 m-auto">
-  <tr class="text-center">
-     <th width="10%">No</th>
-     <th>Nombre</th>
-     <th width="280px">Opciones</th>
-  </tr>
-    @foreach ($roles as $key => $role)
-    <tr >
-        <td class="text-center align-middle">{{ ++$i }}</td>
-        <td>{{ $role->name }}</td>
-        <td class="text-center align-middle">
-            <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Mostrar</a>
-            @can('Editar rol')
-                <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}" style="background-color: #011753;">Editar</a>
-            @endcan
-            @can('Borrar rol')
-                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
-            @endcan
-        </td>
+<div style="overflow-x:auto;"> 
+    <table class="table table-bordered bg-light text-dark w-75 m-auto">
+    <tr class="text-center">
+        <th width="10%">No</th>
+        <th>Nombre</th>
+        <th width="300px">Opciones</th>
     </tr>
-    @endforeach
-</table>
+        @foreach ($roles as $key => $role)
+        <tr >
+            <td class="text-center align-middle">{{ ++$i }}</td>
+            <td class="text-center align-middle">{{ $role->name }}</td>
+            <td class="text-center align-middle">
+                <a class="btn btn-info text-center pr-0 pl-0 m-1" href="{{ route('roles.show',$role->id) }}" style="width: 75px;">Mostrar</a>
+                @can('Editar rol')
+                    <a class="btn btn-primary m-1" href="{{ route('roles.edit',$role->id) }}" style="width: 75px;">Editar</a>
+                @endcan
+                @can('Borrar rol')
+                    {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
+                        {!! Form::submit('Borrar', ['class' => 'btn btn-danger m-1' , 'style' => 'width: 75px']) !!}
+                    {!! Form::close() !!}
+                @endcan
+            </td>
+        </tr>
+        @endforeach
+    </table>
+</div>
 
 
 {!! $roles->render() !!}

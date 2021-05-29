@@ -30,7 +30,7 @@
     <form action="{{ route('reports.update',$report->id) }}" method="POST">
     	@csrf
         @method('PUT')
-		<div class="d-flex justify-content-between mb-0">
+		<div class="container d-flex justify-content-between mb-3">
 		    <div class="mr-5 " style="width: 33%">
 		        <div class="form-group" style="margin-bottom: 40px;">
 		            <strong>Nombre del cliente:</strong>
@@ -49,12 +49,12 @@
 					<input type="string" name="equipmentSN" class="form-control" placeholder="equipmentSN" value="{{ $report->equipmentSN}}"> 
 		        </div>
 		    </div>
-            <div class="flex-column" style="width: 66%;">
-		        <div class="form-group"  style=" margin-bottom: 20px">
+            <div class="flex-column d-flex" style="width: 66%;">
+		        <div class="form-group">
 		            <strong>Accesorios:</strong>
 					<textarea class="form-control" style="height:150px" name="equipmentAccesories" placeholder="equipmentAccesories">{{ $report->equipmentAccesories }}</textarea>
 		        </div>
-				<div class="form-group align-self-end">
+				<div class="form-group mt-auto mb-0">
 		            <strong>Fallo reportado:</strong>
 					<textarea class="form-control" style="height:150px" name="reportedFail" placeholder="reportedFail">{{ $report->reportedFail }}</textarea>
 		        </div>
@@ -62,7 +62,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
 			<a class="btn btn-danger mr-4" href="{{ route('reports.index') }}" style="width: 100px; ">Atras</a>
-		    <button type="submit" class="btn btn-primary ml-4" style="width: 100px; background-color: #011753">Aceptar</button>
+		    <button type="submit" class="btn btn-primary ml-4" style="width: 100px;">Aceptar</button>
 		</div>
 
 
