@@ -39,6 +39,10 @@ Route::get('reports/{id}/print', [App\Http\Controllers\PDFController::class, 'pr
 Route::get('reports/{id}/close', [App\Http\Controllers\ReportController::class, 'close'])->name('reports.close');
 Route::post('reports/{id}/close', [App\Http\Controllers\ReportController::class, 'finish'])->name('reports.finish');
 
+//autocomplete
+Route::get('search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
+Route::get('autocomplete', [App\Http\Controllers\SearchController::class, 'autocomplete'])->name('autocomplete');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

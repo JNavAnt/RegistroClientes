@@ -39,7 +39,8 @@
 		    <div class="mr-5" style="width: 33%">
 		        <div class="form-group">
 		            <strong>Nombre del cliente:</strong>
-					{!! Form::text('nombre', null, array('placeholder' => 'Nombre','class' => 'form-control')) !!}
+					{!! Form::text('nombre', null, array('placeholder' => 'Nombre','class' => 'typeahead form-control', 'autocomplete'=>'off')) !!}
+					
 		        </div>
 				<div class="form-group">
 		            <strong>Marca:</strong>
