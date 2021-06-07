@@ -7,7 +7,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReportController;
-
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AutocompleteSearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,8 +40,17 @@ Route::get('reports/{id}/print', [App\Http\Controllers\PDFController::class, 'pr
 Route::get('reports/{id}/close', [App\Http\Controllers\ReportController::class, 'close'])->name('reports.close');
 Route::post('reports/{id}/close', [App\Http\Controllers\ReportController::class, 'finish'])->name('reports.finish');
 
+//autocomplete
+//Route::get('/search', [SearchController::class, 'index'])->name('search');
+//Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
+Route::get('/autocomplete', [ReportController::class, 'autocomplete'])->name('reports.autocomplete');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/autocomplete-search', [AutocompleteSearchController::class, 'index'])->name('autocomplete.search.index');
+Route::get('/autocomplete-search-query', [AutocompleteSearchController::class, 'query'])->name('autocomplete.search.query');
