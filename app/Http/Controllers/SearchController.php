@@ -24,7 +24,7 @@ class SearchController extends Controller
      */
     public function autocomplete(Request $request)
     {
-        $data = Customer::whereRaw("UPPER(item_name) LIKE '%" . strtoupper($request) . "%'")->get();
+        $data = Customer::whereRaw("fullName LIKE '%" . strtoupper($request->input('query')) . "%'")->get();
         /*$data = Customer::select("fullName")
         //->where("fullName","=","%.$request->query.%")
         ->where("fullName",'LIKE', '%' . $request->query . '%')
