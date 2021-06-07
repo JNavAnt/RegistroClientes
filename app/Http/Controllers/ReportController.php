@@ -221,6 +221,18 @@ class ReportController extends Controller
         return redirect()->route('reports.index')
                         ->with('success','El reporte ha sido cerrado');
     }
+
+    public function autocomplete(Request $request)
+    {
+        
+        $input = $request->all();
+        $data = Customer::select("fullName as name")->where("fullName","LIKE","%{$input['query']}%")->get();
+   
+        return response()->json($data);
+        
+    }
+
+    
     /**
      * Remove the specified resource from storage.
      *

@@ -40,7 +40,16 @@
 		        <div class="form-group">
 		            <strong>Nombre del cliente:</strong>
 					{!! Form::text('nombre', null, array('placeholder' => 'Nombre','class' => 'typeahead form-control', 'autocomplete'=>'off')) !!}
-					
+					<script type="text/javascript">
+						var path = "{{ route('reports.autocomplete') }}";
+						$('input.typeahead').typeahead({
+							source:  function (query, process) {
+							return $.get(path, { query: query }, function (data) {
+								return process(data);
+							});
+							}
+						});
+					</script>
 		        </div>
 				<div class="form-group">
 		            <strong>Marca:</strong>
