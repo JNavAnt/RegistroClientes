@@ -22,7 +22,6 @@
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            //text: message
             html: message
         })
     </script>

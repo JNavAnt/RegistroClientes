@@ -6,27 +6,21 @@ use App\Models\Report;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 { 
     /**
-     * Display a listing of the resource.
+     * Permission assignations.
      *
-     * @return \Illuminate\Http\Response
      */
     function __construct()
     {
-         /*$this->middleware('permission:report-list|report-create|report-edit|report-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:report-create', ['only' => ['create','store']]);
-         $this->middleware('permission:report-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:report-delete', ['only' => ['destroy']]);*/
-
         $this->middleware('permission:Mostrar reporte|Crear reporte|Editar reporte|Borrar reporte', ['only' => ['index','store']]);
         $this->middleware('permission:Crear reporte', ['only' => ['create','store']]);
         $this->middleware('permission:Editar reporte', ['only' => ['edit','update']]);
         $this->middleware('permission:Borrar reporte', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +28,7 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {   
-        
+        //Select from customer table where fullname like request, query sends back data to second query
         $customer = Customer::where([
             ['fullName', '!=', Null],
             [function($query) use ($request){
@@ -46,6 +40,7 @@ class ReportController extends Controller
             ->orderBy("id","desc")
             ->paginate(10);
 
+        //Select from Report table where Customer id equals result from previous query, function sends back data to search bar
         $reports = Report::where(
             function ($query) use ($customer) {
                 foreach($customer as $customer) {
@@ -77,6 +72,7 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
+        //Validation rules for inputs
         request()->validate([
             'nombre' => 'required|exists:customers,fullName',
             'marca' => 'required',
@@ -84,15 +80,16 @@ class ReportController extends Controller
             'numeroserie' => 'required',
             'accesorios' => '',
             'fallo' => '',
-            'costodiagnostico' => 'numeric',
-            //'fechaentrada' => '',
+            'costodiagnostico' => 'numeric'
         ]);
-
+        //Select from customer table where fullName of input matches first customer record
         $id = Customer::where('fullName', $request->nombre)->first()->id;
-        //$entranceDate = Carbon::parse($request->fechaentrada);
+
+        //Get current date and format to YMD
         $entranceDate = Carbon::now();
         $entranceDate->format('Y-m-d H:i:s');
 
+        //Array used to insert into database
         $input = [
             'customer_id' => $id,
             'equipmentBrand' => $request->marca,
@@ -103,6 +100,8 @@ class ReportController extends Controller
             'diagnosticCost' => $request->costodiagnostico,
             'entranceDate' => $entranceDate,
         ];
+
+        //Insert into database
         Report::create($input);
 
         return redirect()->route('reports.index')
@@ -136,10 +135,7 @@ class ReportController extends Controller
      */
     public function edit(Report $report)
     {
-        //$date = $report->entranceDate->format('d/m/y h:i:s');
-        $date = \Carbon\Carbon::parse($report->entranceDate)->format('d/m/y h:i:s');
-        //$customer = $report = Customer::find($report->customer->id);
-        return view('reports.edit',compact('report','date'));
+        return view('reports.edit',compact('report'));
     }
     
     /**
@@ -151,38 +147,27 @@ class ReportController extends Controller
      */
     public function update(Request $request, Report $report)
     {
+        //Validation rules for inputs
          request()->validate([
             'fullName' => 'required|exists:customers',
             'equipmentBrand' => 'required',
             'equipmentModel' => 'required',
             'equipmentSN' => 'required',
             'equipmentAccesories' => '',
-            'reportedFail' => '',
-            'solution' => '',
-            'diagnosticCost' => 'numeric',
-            'finalCost' => 'numeric|nullable',
-            'entranceDate' => '',
-            'exitDate' => ''
+            'reportedFail' => ''
         ]);
         
+        //Select Customer where fullName matches request
         $id = Customer::where('fullName', $request->fullName)->first()->id;
-        $entranceDate = \Carbon\Carbon::parse($request->entranceDate);
-        $entranceDate->format('Y-m-d H:i:s');
-        $exitDate = \Carbon\Carbon::parse($request->exitDate);
-        $exitDate->format('Y-m-d H:i:s');
-        /*$report->update($request->all());*/
+        
+        //Update table with request
         $report->update([
             'customer_id' => $id,
             'equipmentBrand' => $request->equipmentBrand,
             'equipmentModel' => $request->equipmentModel,
             'equipmentSN' => $request->equipmentSN,
             'equipmentAccesories' => $request->equipmentAccesories,
-            'reportedFail' => $request->reportedFail,
-            'solution' => $request->solution,
-            'diagnosticCost' => $request->diagnosticCost,
-            'finalCost' => $request->finalCost,
-            'entranceDate' => $entranceDate,
-            'exitDate' => $exitDate,
+            'reportedFail' => $request->reportedFail
 
         ]);
     
@@ -200,17 +185,23 @@ class ReportController extends Controller
         return view('reports.close',compact('report'));
     }
 
+    /* 
+        Show the form for finishing the specified report.
+    */ 
     public function finish(Request $request, $id)
     {
         $report = Report::find($id);
-         request()->validate([
+        //Validation rules for input
+        request()->validate([
             'solucion' => 'required',
             'costoFinal' => 'required'
         ]);
         
+        //Get current date and format to YMD
         $exitDate = Carbon::now();
         $exitDate->format('Y-m-d H:i:s');
-        /*$report->update($request->all());*/
+
+        //Update specified report 
         $report->update([
             'solution' => $request->solucion,
             'finalCost' => $request->costoFinal,
@@ -222,6 +213,9 @@ class ReportController extends Controller
                         ->with('success','El reporte ha sido cerrado');
     }
 
+    /* 
+        Function to autocomplete customer field
+    */
     public function autocomplete(Request $request)
     {
         

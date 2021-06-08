@@ -34,10 +34,6 @@
                         </tr>
                     @endforeach
                 </table>
-                
-                <!--@foreach($rolePermissions as $v)
-                    <label class="label label-success">{{ $v->name }},</label>
-                @endforeach-->
             @endif
         </div>
     </div>

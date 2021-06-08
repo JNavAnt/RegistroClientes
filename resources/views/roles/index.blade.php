@@ -23,13 +23,6 @@
                             </button>
                         </span>
                         <input type="text" class="form-control mr-2" name="term" placeholder="Search users" id="term">
-                        <!--<a href="{{ route('roles.index') }}" >
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger" type="button" title="Refresh page">
-                                    <span class="fas fa-sync-alt">Actualizar</span>
-                                </button>
-                          </span>
-                        </a>-->
                       </div>
                 </form>
             </div>

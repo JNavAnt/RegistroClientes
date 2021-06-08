@@ -41,8 +41,6 @@ Route::get('reports/{id}/close', [App\Http\Controllers\ReportController::class, 
 Route::post('reports/{id}/close', [App\Http\Controllers\ReportController::class, 'finish'])->name('reports.finish');
 
 //autocomplete
-//Route::get('/search', [SearchController::class, 'index'])->name('search');
-//Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 Route::get('/autocomplete', [ReportController::class, 'autocomplete'])->name('reports.autocomplete');
 
 Route::get('/dashboard', function () {
@@ -51,6 +49,3 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-
-Route::get('/autocomplete-search', [AutocompleteSearchController::class, 'index'])->name('autocomplete.search.index');
-Route::get('/autocomplete-search-query', [AutocompleteSearchController::class, 'query'])->name('autocomplete.search.query');

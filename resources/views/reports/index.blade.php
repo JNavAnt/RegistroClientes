@@ -22,13 +22,6 @@
                                 </button>
                             </span>
                             <input type="text" class="form-control " name="term" placeholder="Search reports" id="term">
-                            <!--<a href="{{ route('reports.index') }}" >
-                                <span class="input-group-btn">
-                                    <button class="btn btn-danger" type="button" title="Refresh page">
-                                        <span class="fas fa-sync-alt">Actualizar</span>
-                                    </button>
-                            </span>
-                            </a>-->
                         </div>
                     </form>
                 </div>
@@ -72,7 +65,7 @@
                 <td>
                     <form  class="text-center" action="{{ route('reports.destroy',$report->id) }}" method="POST">
                         <div class="row ">
-                            <div class="col p-1"><a class="btn btn-info text-center" href="{{ route('reports.show',$report->id) }}" style="width: 75px;">Mostrar</a></div>
+                            <div class="col p-1 "><a class="btn btn-info text-center px-0" href="{{ route('reports.show',$report->id) }}" style="width: 75px;">Mostrar</a></div>
                             <div class="col p-1">
                                 @can('Editar reporte')
                                 @if($report->state->id != 3)

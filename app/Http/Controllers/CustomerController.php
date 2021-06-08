@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 { 
     /**
-     * Display a listing of the resource.
+     * Permission assignations.
      *
-     * @return \Illuminate\Http\Response
      */
+    
     function __construct()
     {
 
@@ -27,6 +27,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
+        //Select from customer table where fullname like request, function sends back data to search bar
         $customers = Customer::where([
             ['fullName', '!=', Null],
             [function($query) use ($request){
@@ -37,7 +38,7 @@ class CustomerController extends Controller
         ])
             ->orderBy("id","desc")
             ->paginate(10);
-        //$customers = Customer::latest()->paginate(5);
+
         return view('customers.index',compact('customers'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
@@ -60,6 +61,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        //Validation rules for input fields
         request()->validate([
             'nombre' => 'required',
             'negocio' => 'required',
@@ -67,6 +69,7 @@ class CustomerController extends Controller
             'telefono' => 'required'
         ]);
         
+        //Array used to insert into database
         $input = [
             'fullName' => $request->nombre,
             'business' => $request->negocio,
@@ -112,20 +115,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
+         //Validation rules for input fields
          request()->validate([
             'fullName' => 'required',
             'business' => 'required',
             'email' => 'required',
             'phone' => 'required'
         ]);
-
-        $input = [
-            'fullName' => $request->nombre,
-            'business' => $request->negocio,
-            'email' => $request->email,
-            'phone' => $request->telefono,
-              
-        ];
 
         $customer->update($request->all());
     
@@ -142,8 +138,7 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
 
-        
-
+        //Validate that this customer doesn't have any report tied to it
         $customerRel = Customer::has('report')->find($customer->id);
         if($customerRel != null){
             return redirect()->route('customers.index')

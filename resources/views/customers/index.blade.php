@@ -22,13 +22,6 @@
                                 </button>
                             </span>
                             <input type="text" class="form-control" name="term" placeholder="Search customers" id="term">
-                            <!--<a href="{{ route('customers.index') }}" >
-                                <span class="input-group-btn">
-                                    <button class="btn btn-danger" type="button" title="Refresh page">
-                                        <span class="fas fa-sync-alt">Actualizar</span>
-                                    </button>
-                            </span>
-                            </a>-->
                         </div>
                     </form>
                 </div>
@@ -55,6 +48,7 @@
                 })
     </script>
     @endif
+    
     <div style="overflow-x:auto;">
         <table class="table table-bordered bg-light text-dark ">
             <tr class="text-center">
@@ -74,16 +68,14 @@
                 <td class="align-middle">{{ $customer->phone }}</td>
                 <td class="text-center align-middle">
                     <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
-                        <!--<a class="btn btn-info" href="{{ route('customers.show',$customer->id) }}">Mostrar</a>-->
                         @can('Editar cliente')
-                            <a class="btn btn-primary m-1" href="{{ route('customers.edit',$customer->id) }}" style="width: 75px">Editar</a>
+                            <a class="btn btn-primary my-1" href="{{ route('customers.edit',$customer->id) }}" style="width: 75px">Editar</a>
                         @endcan
-
 
                         @csrf
                         @method('DELETE')
                         @can('Borrar cliente')
-                            <button type="submit" class="btn btn-danger m-1" style="width: 75px">Borrar</button>
+                            <button type="submit" class="btn btn-danger my-1" style="width: 75px">Borrar</button>
                         @endcan
                     </form>
                 </td>

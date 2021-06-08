@@ -29,12 +29,8 @@
     </script>
 @endif
 
-
-    <!--<form action="{{ route('reports.store') }}" method="POST">-->
 	{!! Form::open(array('route' => 'reports.store','method'=>'POST')) !!}
     	@csrf
-
-
          <div class="container d-flex justify-content-between">
 		    <div class="mr-5" style="width: 33%">
 		        <div class="form-group">
@@ -85,7 +81,5 @@
 		</div>
 
 	{!! Form::close() !!}
-    <!--</form>-->
-
 
 @endsection

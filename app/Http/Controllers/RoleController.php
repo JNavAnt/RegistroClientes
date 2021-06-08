@@ -18,10 +18,10 @@ class RoleController extends Controller
      */
     function __construct()
     {
-        /* $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:role-create', ['only' => ['create','store']]);
-         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:role-delete', ['only' => ['destroy']]);*/
+        /*
+         * Permission assignations.
+         *
+         */
         $this->middleware('permission:Mostrar rol|Crear rol|Editar rol|Borrar rol', ['only' => ['index','store']]);
         $this->middleware('permission:Crear rol', ['only' => ['create','store']]);
         $this->middleware('permission:Editar rol', ['only' => ['edit','update']]);
@@ -35,6 +35,8 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
+
+        //Select from Roles table where name like request, function sends back data to search bar
         $roles = Role::where([
             ['name', '!=', Null],
             [function($query) use ($request){
@@ -45,7 +47,7 @@ class RoleController extends Controller
         ])
             ->orderBy("id","desc")
             ->paginate(10);
-        //$roles = Role::orderBy('id','DESC')->paginate(5);
+            
         return view('roles.index',compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 10);
     }
@@ -69,11 +71,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        //Validation rules for input
         $this->validate($request, [
             'nombre' => 'required|unique:roles,name',
             'permiso' => 'required',
         ]);
     
+        //Insert request into roles table and sync permissions into roles
         $role = Role::create(['name' => $request->input('nombre')]);
         $role->syncPermissions($request->input('permiso'));
     
@@ -122,6 +126,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Validation rules for input
         $this->validate($request, [
             'name' => 'required',
             'permisos' => 'required',

@@ -34,8 +34,19 @@
 		    <div class="mr-5 " style="width: 33%">
 		        <div class="form-group" style="margin-bottom: 40px;">
 		            <strong>Nombre del cliente:</strong>
-					<input type="text" name="fullName" class="form-control" placeholder="Customer name" value="{{ $report->customer->fullName }}">
-		        </div>
+					<input type="text" name="fullName" class="typeahead form-control" placeholder="Customer name" value="{{ $report->customer->fullName }}" autocomplete="off">
+					<script type="text/javascript">
+						var path = "{{ route('reports.autocomplete') }}";
+						$('input.typeahead').typeahead({
+							source:  function (query, process) {
+							return $.get(path, { query: query }, function (data) {
+								return process(data);
+							});
+							}
+						});
+					</script>
+				
+				</div>
 				<div class="form-group" style="margin-bottom: 40px;">
 		            <strong>Marca:</strong>
 					<input type="text" name="equipmentBrand" class="form-control" placeholder="equipmentBrand" value="{{$report->equipmentBrand}}">

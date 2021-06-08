@@ -12,11 +12,11 @@ use Illuminate\Support\Arr;
     
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    /*
+    * Permission assignations.
+    *
+    */
     function __construct()
     {
         $this->middleware('permission:Mostrar usuario|Crear usuario|Editar usuario|Borrar usuario', ['only' => ['index','store']]);
@@ -24,9 +24,14 @@ class UserController extends Controller
         $this->middleware('permission:Editar usuario', ['only' => ['edit','update']]);
         $this->middleware('permission:Borrar usuario', ['only' => ['destroy']]);
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
+        //Select from Users table where name like request, function sends back data to search bar
         $data = User::where([
             ['name', '!=', Null],
             [function($query) use ($request){
@@ -38,7 +43,6 @@ class UserController extends Controller
             ->orderBy("id","desc")
             ->paginate(10);
 
-        //$data = User::orderBy('id','DESC')->paginate(5);
         return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 10);
     }
@@ -62,6 +66,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        //validation rules for input
         $this->validate($request, [
             'nombre' => 'required|unique:users,name',
             'email' => 'required|email|unique:users,email',
@@ -69,8 +74,7 @@ class UserController extends Controller
             'roles' => 'required'
         ]);
 
-        //required|string|confirmed|
-    
+        //Array used to insert into database
         $input = [
             'name' => $request->nombre,
             'email' => $request->email,
@@ -126,6 +130,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //validation rules for input
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
@@ -141,7 +146,6 @@ class UserController extends Controller
               
         ];
 
-        //$input = $request->all();
         if(!empty($input['password'])){ 
             $input['password'] = Hash::make($input['password']);
         }else{
